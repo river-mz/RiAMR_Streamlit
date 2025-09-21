@@ -171,7 +171,7 @@ def load_xgb_model(antibiotic):
 
 # Function to display demo DataFrame
 def show_demo_data():
-    demo_df = pd.read_csv('./test_demo_input3.csv')
+    demo_df = pd.read_csv('./intermedia_folder/test_demo_input3.csv')
     st.write("Demo Data & Data Type:")
     st.dataframe(demo_df.reset_index(drop=True), use_container_width=True,  hide_index=True)
 
@@ -197,7 +197,7 @@ if selected == "Home":
     )
 
 
-    overview_image_path = f'/ibex/user/xiex/ide/AMR_proj2/streamlit_running/view2.jpg'
+    overview_image_path = f'/ibex/user/xiex/ide/AMR_proj2/streamlit_running/resource/view2.jpg'
 
     # overview_image_path = f'/ibex/user/xiex/ide/AMR_proj2/streamlit_running/overview3.jpg'
 
@@ -292,7 +292,7 @@ elif selected == "Predict":
             with st.container():
                 st.markdown("📄 Example Input File (example input file to help you format your CSV correctly):")
                 try:
-                    example_df = pd.read_csv('/ibex/user/xiex/ide/AMR_proj2/streamlit_running/test11_before_preprocessing.csv')
+                    example_df = pd.read_csv('/ibex/user/xiex/ide/AMR_proj2/streamlit_running/intermedia_folder/test11_before_preprocessing.csv')
 
                     st.data_editor(
                         example_df.head(),  # Show only the first few rows
@@ -530,7 +530,7 @@ elif selected == "Predict":
             final_df = final_df.replace('NA', np.nan)
             X = final_df[feature_columns].fillna(-1).values
 
-            final_df.to_csv('test11.csv',header=1, index=False)
+            final_df.to_csv('./intermedia_folder/test11.csv',header=1, index=False)
 
 
             results_df = predict_with_ci(final_df, ['resistance_'+ v for v in selected_antibiotics],  )
@@ -606,10 +606,10 @@ elif selected == "Predict":
                         # Create the force plot
                         with st.container():
                             shap.force_plot(explainer.expected_value, shap_values_rounded, matplotlib=True, feature_names=feature_names)
-                        plt.savefig('shap_force_plot.png')
+                        plt.savefig('./resource/shap_force_plot.png')
                         
                         # Store image path in session state
-                        st.session_state.shap_image_path = 'shap_force_plot.png'
+                        st.session_state.shap_image_path = './resource/shap_force_plot.png'
 
                         # Create a DataFrame for feature scores
                         feature_scores_df = pd.DataFrame({
